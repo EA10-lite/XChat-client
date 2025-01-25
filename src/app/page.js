@@ -1,9 +1,10 @@
 "use client"
+import { EmptyChatRoom } from '@/containers';
 import './globals.css';
 export default function Home() {
   return (
-    <div className="">
-      <h1> Hello Welcome to our chat app </h1>
+    <div className="w-full h-full">
+      <EmptyChatRoom />
     </div>
   );
 }

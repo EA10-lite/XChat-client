@@ -11,7 +11,7 @@ const Sidebar = () => {
     return (
         <div className="sidebar w-full h-full bg-white border-r border-grey">
             <div className="flex w-full h-full">
-                <div className="sidebar-navigators w-[68px] py-4 h-full border border-r border-grey flex flex-col">
+                <div className="sidebar-navigators bg-[#eeeeee] w-[68px] py-4 h-full border border-r border-grey flex flex-col">
                     <div className="grow">
                         <ul className="flex flex-col items-center gap-4 justify-center">
                             <SidebarActionButtons 

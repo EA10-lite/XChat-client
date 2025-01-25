@@ -5,7 +5,7 @@ import { MdSend } from "react-icons/md";
 import { EmojiMenu } from "../popovers";
 
 
-const ChatInput = () => {
+const ChatInput = ({ isDisabled=false }) => {
     const [message, setMessage] = useState("");
 
     return (
@@ -20,6 +20,7 @@ const ChatInput = () => {
                             placeholder="Send message to this user.."
                             value={message}
                             onChange={(e)=> setMessage(e.target.value)}
+                            disabled={isDisabled}
                         />
                     </div>
 
