@@ -1,3 +1,4 @@
+import AppLayout from "@/containers/AppLayout";
 import "./globals.css";
 
 export const metadata = {
@@ -8,8 +9,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="">
-        {children}
+      <body className="w-full h-[100vh]">
+        <AppLayout>
+          {children}
+        </AppLayout>
       </body>
     </html>
   );
