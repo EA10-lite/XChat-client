@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { PiMicrophoneFill } from "react-icons/pi";
 import { MdSend } from "react-icons/md";
