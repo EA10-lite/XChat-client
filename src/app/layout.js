@@ -1,5 +1,6 @@
-import AppLayout from "@/containers/AppLayout";
 import "./globals.css";
+import AppLayout from "@/containers/AppLayout";
+import UserProvider from "@/context/UserContext";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,9 +11,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="w-full h-[100vh]">
-        <AppLayout>
-          {children}
-        </AppLayout>
+        <UserProvider>
+          <AppLayout>
+            {children}
+          </AppLayout>
+        </UserProvider>
       </body>
     </html>
   );
