@@ -1,13 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Formik } from "formik";
 import { auth_schema } from "@/schema/auth";
 import { Field, Submit } from "@/components/forms";
 import Link from "next/link";
 import auth from "@/services/auth";
+import { UserContext } from "@/context/UserContext";
 
 const Page = () => {
-    const { login, user} = useContext(UserContext);
+    const { login, user } = useContext(UserContext);
     
     const [loading, setLoading] = useState(false);
     const handleSubmit = async (values) => {
