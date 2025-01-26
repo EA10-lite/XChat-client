@@ -3,20 +3,12 @@
 const dev = {
     ENV: "test",
     BASE_API: "http://localhost:4000/api",
-    CLOUDINARY_CLOUD_NAME: "du5g5tizz",
-    CLOUDINARY_KEY: "778328676594889",
-    CLOUDINARY_SECRET: "J-ppLjn8mkXYjIMk-O9HIWCxNAs",
-    CLOUDINARY_PRESET: "sfglbsa6",
 };
   
 
 const prod = {
     ENV: "prod",
     BASE_API: "https://xchat-server-c0ch.onrender.com/api",
-    CLOUDINARY_CLOUD_NAME: "du5g5tizz",
-    CLOUDINARY_KEY: "778328676594889",
-    CLOUDINARY_SECRET: "J-ppLjn8mkXYjIMk-O9HIWCxNAs",
-    CLOUDINARY_PRESET: "sfglbsa6",
 }
   
   const nextConfig = {
