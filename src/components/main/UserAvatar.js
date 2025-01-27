@@ -8,7 +8,9 @@ const UserAvatar = ({ name, img_url }) => {
     return (
         <Avatar>
             <AvatarImage src={img_url} alt={name} />
-            <AvatarFallback className="uppercase font-[600]"> { name.split(" ")[0][1] + name.split(" ")[1][0] } </AvatarFallback>
+            <AvatarFallback className="uppercase font-[600]"> 
+                { name.slice(0,2) } 
+            </AvatarFallback>
         </Avatar>
     )
 }

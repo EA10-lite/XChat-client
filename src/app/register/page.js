@@ -29,7 +29,7 @@ const Page = () => {
 
     return (
         <div className="login h-full w-full flex items-center justify-center">
-            <div className="form w-[420px] bg-[#eeeeee] p-[24px] rounded-[8px]">
+            <div className="form w-[95%] md:w-[420px] bg-[#eeeeee] p-[24px] rounded-[8px]">
                 <h2 className="text-[22px] mb-4 font-[500]"> Register </h2>
 
                 <Formik
