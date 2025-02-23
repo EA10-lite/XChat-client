@@ -1,5 +1,6 @@
 import "./globals.css";
 import AppLayout from "@/containers/AppLayout";
+import ChatProvider from "@/context/ChatContext";
 import UserProvider from "@/context/UserContext";
 
 export const metadata = {
@@ -12,9 +13,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="w-full h-[100vh]">
         <UserProvider>
-          <AppLayout>
-            {children}
-          </AppLayout>
+          <ChatProvider>
+            <AppLayout>
+              {children}
+            </AppLayout>
+          </ChatProvider>
         </UserProvider>
       </body>
     </html>

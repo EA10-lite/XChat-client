@@ -5,8 +5,13 @@ import { MdSend } from "react-icons/md";
 import { EmojiMenu } from "../popovers";
 
 
-const ChatInput = ({ isDisabled=false }) => {
+const ChatInput = ({ isDisabled=false, onSend }) => {
     const [message, setMessage] = useState("");
+
+    const handleSendMessage = () => {
+        onSend(message);
+        setMessage("");
+    }
 
     return (
         <div className="footer absolute bottom-0 bg-white w-full min-h-[fit-content]">
@@ -24,11 +29,14 @@ const ChatInput = ({ isDisabled=false }) => {
                         />
                     </div>
 
-                    { message?.length > 0 ? (
-                        <MdSend className="text-[24px] cursor-pointer" />
-                    ) : (
-                        <PiMicrophoneFill className="text-[24px] cursor-pointer" />
-                    )}
+                    <button onClick={handleSendMessage}>
+                        { message?.length > 0 ? (
+                            <MdSend className="text-[24px] cursor-pointer" />
+                        ) : (
+                            <PiMicrophoneFill className="text-[24px] cursor-pointer" />
+                        )}
+                    </button>
+
                 </div>
             </div>
         </div>

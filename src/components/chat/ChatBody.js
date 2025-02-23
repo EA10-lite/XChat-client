@@ -1,10 +1,12 @@
 import React from "react";
 import { Messages } from "@/containers";
 
-const ChatBody = () => {
+const ChatBody = ({ messages }) => {
     return (
-         <div className="body px-[24px] py-[24px] grow overflow-auto">
-            <Messages />
+         <div className="body px-[24px] py-[24px] mb-[64px] grow overflow-auto">
+            <Messages 
+                messages={messages}
+            />
         </div>
     )
 }

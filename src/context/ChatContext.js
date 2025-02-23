@@ -1,19 +1,34 @@
-import React, { createContext } from "react";
-import { create} from "zustand"
+"use client";
+import React, { createContext, useContext, useEffect, useState } from "react";
+
+import { socket } from "../../socket";
+import { UserContext } from "./UserContext";
 
 export const ChatContext = createContext();
 
-const ChatContextProvider = ({ children }) => {
-    const useStore = create((set) => ({
-        user: {},
-        login: () => null,
-        logout: () => null,
-    }))
+const ChatProvider = ({ children }) => {
+    const [recentChats, setRecentChats] = useState();
+    const { user } = useContext(UserContext);
+
+    useEffect(()=> {
+        if(user) {
+            socket.emit("userConnected", user?._id);
+        }
+
+        socket.on("updateRecentChats", (updatedChats) => {
+            setRecentChats(updatedChats);
+        });
+
+        return () => {
+            socket.off("updateRecentChats");
+        };
+    },[user]);
     
     return (
-        <ChatContext.Provider  
+        <ChatContext.Provider 
             value={{
-                useStore
+                recentChats,
+                setRecentChats,
             }}
         >
             { children }
@@ -21,4 +36,4 @@ const ChatContextProvider = ({ children }) => {
     )
 }
 
-export default ChatContextProvider;
+export default ChatProvider;
