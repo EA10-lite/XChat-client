@@ -6,9 +6,10 @@ import { FindUser } from "@/services/user";
 import { useDebounce } from "@/hooks/useDebounce";
 import { LuLoader2 } from "react-icons/lu"
 import { ChatContext } from "@/context/ChatContext";
+import { MdClose } from "react-icons/md";
 
 const Chats = () => {
-    const { setRecentChats, recentChats } = useContext(ChatContext);
+    const { recentChats } = useContext(ChatContext);
 
     const [searchTerm, setSearchTerm] = useState('');
     const debouncedSearchTerm = useDebounce(searchTerm, 300);
@@ -19,20 +20,14 @@ const Chats = () => {
         try {
             setSearching(true);
             const response = await FindUser(value);
-            setResult(response)
+            console.log("response from search user: ", response);
+            setResult(response?.data?.result);
         } catch (error) {
             
         } finally {
             setSearching(false);
         }
     }
-
-    useEffect(() => {
-        if (debouncedSearchTerm) {
-          searchUser(debouncedSearchTerm);
-        }
-    }, [debouncedSearchTerm]);
-
 
     return (
         <div className="relative w-full h-full">
@@ -48,14 +43,6 @@ const Chats = () => {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-
-                    { searching ? (
-                        <LuLoader2 className="text-base animate-spin delay-150ms" />
-                    ) : searchTerm > 0 ? (
-                        <MdClose className="text-base" />
-                    ) : (
-                        <FiSearch className="text-base" />
-                    )}
                 </div>
             </div>
             <div className="body">

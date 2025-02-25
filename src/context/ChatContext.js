@@ -13,16 +13,15 @@ const ChatProvider = ({ children }) => {
 
     useEffect(()=> {
         if(user) {
-            socket.emit("userConnected", user?._id);
+            socket.emit("userConnected", user?.username);
+
+            
+            socket.on("updateRecentChats", (updatedChats) => {
+                console.log("listening for new chat: ", updatedChats);
+                setRecentChats(updatedChats);
+            });
         }
 
-        socket.on("updateRecentChats", (updatedChats) => {
-            setRecentChats(updatedChats);
-        });
-
-        return () => {
-            socket.off("updateRecentChats");
-        };
     },[user]);
     
     return (

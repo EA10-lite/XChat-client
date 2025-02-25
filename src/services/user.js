@@ -1,3 +1,5 @@
 import client from "./client";
 
-export const FindUser = async (userId) => {}
+export const FindUser = async (searchQuery) => {
+    return client.get(`/auth/search/?search=${searchQuery}`);
+}

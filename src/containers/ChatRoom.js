@@ -26,16 +26,11 @@ const ChatRoom = () => {
         }
     }
 
-    const updateRecentChat = (newMessage)=> {
-        
-    }
-
     useEffect(() => {
         if(user && selectedChat) {
             socket.emit("joinPrivateRoom", { user1: user?.username, user2: selectedChat?.username });
     
             socket.on("privateMessage", (data) => {
-                console.log("data: ", data);
                 setMessages((prev) => [...prev, data]);
             });
 
