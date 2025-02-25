@@ -8,16 +8,15 @@ import { UserContext } from "@/context/UserContext";
 import { ChatContext } from "@/context/ChatContext";
 
 const ChatRoom = () => {
-    const { chat } = useParams();
     const { user } = useContext(UserContext);
-    const { setRecentChats } = useContext(ChatContext);
+    const { setRecentChats, selectedChat } = useContext(ChatContext);
 
     const [messages, setMessages] = useState([]);
     const sendMessage = (message) => {
         if (message.trim()) {
             const newMessage = {
                 sender: user.username,
-                receiver: chat,
+                receiver: selectedChat?.username,
                 message: message.trim(),
                 updatedAt: new Date().toISOString(),
             };
@@ -32,24 +31,24 @@ const ChatRoom = () => {
     }
 
     useEffect(() => {
-        if(user && chat) {
-            socket.emit("joinPrivateRoom", { user1: user?.username, user2: chat });
+        if(user && selectedChat) {
+            socket.emit("joinPrivateRoom", { user1: user?.username, user2: selectedChat?.username });
     
             socket.on("privateMessage", (data) => {
+                console.log("data: ", data);
                 setMessages((prev) => [...prev, data]);
             });
 
             socket.on("loadChatHistory", (chatHistory) => {
-                console.log("chat history", chatHistory);
                 setMessages(chatHistory);
             });
         }
-    }, [chat, user]);
+    }, [selectedChat, user]);
 
 
     return (
         <div className="chat-room bg-[#eeeeee] h-full w-full relative flex flex-col">
-            <ChatHeader username={chat} />
+            <ChatHeader username={selectedChat?.username} />
             <ChatBody 
                 messages={messages}
             />

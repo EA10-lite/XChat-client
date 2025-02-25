@@ -7,7 +7,7 @@ import {
 const UserAvatar = ({ name, img_url }) => {
     return (
         <Avatar>
-            <AvatarImage src={img_url} alt={name} />
+            <AvatarImage src={""} alt={name} />
             <AvatarFallback className="uppercase font-[600]"> 
                 { name?.slice(0,2) } 
             </AvatarFallback>

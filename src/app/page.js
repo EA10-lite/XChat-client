@@ -1,10 +1,22 @@
 "use client"
-import { EmptyChatRoom } from '@/containers';
+import { useContext } from 'react';
+
+import { ChatContext } from '@/context/ChatContext';
+import { UserContext } from '@/context/UserContext';
+
+import { ChatRoom, EmptyChatRoom } from '@/containers';
+
 import './globals.css';
+
 export default function Home() {
+  const { selectedChat } = useContext(ChatContext);
+  const { user } = useContext(UserContext);
+
   return (
-    <div className="w-full h-full">
-      <EmptyChatRoom />
-    </div>
+    <>
+     { user && <div className="w-full h-full">
+      { selectedChat ? <ChatRoom /> : <EmptyChatRoom /> }
+      </div> }
+    </>
   );
 }

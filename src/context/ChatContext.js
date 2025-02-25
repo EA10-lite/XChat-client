@@ -8,6 +8,7 @@ export const ChatContext = createContext();
 
 const ChatProvider = ({ children }) => {
     const [recentChats, setRecentChats] = useState();
+    const [selectedChat, setSelectedChat] = useState(null);
     const { user } = useContext(UserContext);
 
     useEffect(()=> {
@@ -29,6 +30,8 @@ const ChatProvider = ({ children }) => {
             value={{
                 recentChats,
                 setRecentChats,
+                selectedChat,
+                setSelectedChat,
             }}
         >
             { children }
