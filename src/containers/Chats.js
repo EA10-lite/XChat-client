@@ -1,18 +1,17 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import { Chat } from "@/components/cards";
-import { FiSearch } from "react-icons/fi";
 import { FindUser } from "@/services/user";
 import { useDebounce } from "@/hooks/useDebounce";
-import { LuLoader2 } from "react-icons/lu"
 import { ChatContext } from "@/context/ChatContext";
-import { MdClose } from "react-icons/md";
+import { UserContext } from "@/context/UserContext";
 
 const Chats = () => {
     const { recentChats } = useContext(ChatContext);
+    const { user } = useContext(UserContext);
 
     const [searchTerm, setSearchTerm] = useState('');
-    const debouncedSearchTerm = useDebounce(searchTerm, 300);
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
     const [result, setResult] = useState(null);
     const [searching, setSearching] = useState(false);
@@ -27,6 +26,16 @@ const Chats = () => {
         } finally {
             setSearching(false);
         }
+    }
+
+    useEffect(()=> {
+        if(debouncedSearchTerm) {
+            searchUser(debouncedSearchTerm);
+        }
+    },[debouncedSearchTerm])
+
+    const sortSearchedResult = () => {
+
     }
 
     return (
@@ -46,7 +55,28 @@ const Chats = () => {
                 </div>
             </div>
             <div className="body">
-                {recentChats && Object.entries(recentChats).map(([roomId, messages]) => (
+                {result && sortSearchedResult()?.map()}
+                {searchTerm && !result && (
+                    <div className="p-[16px] text-xs text-center">
+                        <p><i> Searching for users... </i></p>
+                        <p><i> Please wait a minute </i></p>
+                    </div>
+                )}
+                {searchTerm && !searching && !result && (
+                    <div className="p-[16px]">
+                        <p className="text-xs"> No user found </p>    
+                    </div>
+                )}
+                {searchTerm && result && result?.filter(res => res?.username !== user?.username)?.map((searched_user, index)=> (
+                    <div className="" key={index}>
+                        <Chat 
+                            searched_user={searched_user}
+                            chat={[]}
+                            key={index}
+                        />
+                    </div>
+                ))}
+                {!searchTerm && !searching && recentChats && Object.entries(recentChats).map(([roomId, messages]) => (
                     <Chat 
                         chat={messages}
                         key={roomId}

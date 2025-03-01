@@ -35,8 +35,15 @@ const ChatRoom = () => {
             });
 
             socket.on("loadChatHistory", (chatHistory) => {
+                console.log("loading chat history", chatHistory);
                 setMessages(chatHistory);
             });
+
+            // Cleanup function to remove duplicate listeners
+            return () => {
+                socket.off("privateMessage", handleMessage);
+                socket.off("loadChatHistory", handleChatHistory);
+            };
         }
     }, [selectedChat, user]);
 
