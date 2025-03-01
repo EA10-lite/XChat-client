@@ -29,15 +29,17 @@ const ChatRoom = () => {
     useEffect(() => {
         if(user && selectedChat) {
             socket.emit("joinPrivateRoom", { user1: user?.username, user2: selectedChat?.username });
-    
-            socket.on("privateMessage", (data) => {
-                setMessages((prev) => [...prev, data]);
-            });
 
-            socket.on("loadChatHistory", (chatHistory) => {
-                console.log("loading chat history", chatHistory);
+            const handleMessage = (data) => {
+                setMessages((prev) => [...prev, data]);
+            };
+    
+            const handleChatHistory = (chatHistory) => {
                 setMessages(chatHistory);
-            });
+            };
+    
+            socket.on("privateMessage", handleMessage);
+            socket.on("loadChatHistory", handleChatHistory);
 
             // Cleanup function to remove duplicate listeners
             return () => {
