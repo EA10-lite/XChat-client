@@ -55,14 +55,13 @@ const Chats = () => {
                 </div>
             </div>
             <div className="body">
-                {result && sortSearchedResult()?.map()}
-                {searchTerm && !result && (
+                
+                {searching ? (
                     <div className="p-[16px] text-xs text-center">
                         <p><i> Searching for users... </i></p>
                         <p><i> Please wait a minute </i></p>
                     </div>
-                )}
-                {searchTerm && !searching && !result && (
+                ) : searchTerm && !result && (
                     <div className="p-[16px]">
                         <p className="text-xs"> No user found </p>    
                     </div>
